@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {useTheme} from "styled-components";
 
 const Container = styled.div`
   display: flex;
@@ -10,17 +10,15 @@ const Container = styled.div`
 
 const Title = styled.h1`
   margin: 30px auto;
-  
 `
 
 const Card = styled.form`
-  background-color: #fff6e6;
+  background-color: ${props => props.theme.primary};
   box-shadow: 5px 9px 0px 3px rgba(0, 0, 0, 1);
   -webkit-box-shadow: 5px 9px 0px 3px rgba(0, 0, 0, 1);
   -moz-box-shadow: 5px 9px 0px 3px rgba(0, 0, 0, 1);
 
   transition: all 0.8s ease-in-out;
-  border-radius: 16px;
   border: 1px solid black;
   padding: 50px;
   width: 90%;
@@ -38,7 +36,6 @@ const Input = styled.input<{ borderBottom: boolean }>`
   padding: 20px;
   width: 100%;
   background-color: transparent;
-  color: #2c2c2c;
   font-size: 18px;
   transition: border-bottom 0.8s ease-in-out;
   font-weight: bold;
@@ -46,7 +43,6 @@ const Input = styled.input<{ borderBottom: boolean }>`
   border-bottom: ${(props) => (props.borderBottom ? "" : "none")};
 
   ::placeholder {
-    color: black;
     font-weight: normal;
     transition: opacity 0.8s ease-in-out;
   }
@@ -92,7 +88,6 @@ const Checkmark = styled.span`
   height: 18px;
   width: 18px;
   border: 1px solid black;
-  border-radius: 2px;
 
   &::after {
     content: "";
@@ -102,7 +97,7 @@ const Checkmark = styled.span`
     top: 3px;
     width: 3px;
     height: 10px;
-    border: solid #2c2c2c;
+    border: solid black;
     border-width: 0 2px 2px 0;
     transform: rotate(-45deg);
     background-color: #00ff00;
@@ -115,10 +110,9 @@ const Checkmark = styled.span`
 `;
 
 const FancyButton = styled.button`
-  background-color: #ee6007;
+  background-color: ${props => props.theme.secondary};
   color: white;
   border: none;
-  border-radius: 5px;
   padding: 10px 20px;
   font-size: 16px;
   box-shadow: 2px 2px 0px 3px rgba(0, 0, 0, 1);
@@ -147,6 +141,8 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function Home() {
+
+  const theme = useTheme();
   const pempek = [
     "Adaan",
     "Lenjer",
