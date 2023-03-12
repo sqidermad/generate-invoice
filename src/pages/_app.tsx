@@ -1,6 +1,21 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import { AppProps } from "next/app";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { theme } from "@/styles/theme";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: ${theme.background};
+    color: ${theme.text};
+  }
+`;
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
 }
+
+export default MyApp;
