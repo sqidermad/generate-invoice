@@ -2,6 +2,8 @@
 
 This web app allows the user to generate custom receipts for their Pempek selling business. The app includes a form where the user can input their Pempek order details, and a receipt generator that outputs a custom receipt in the Japanese retro-alike style. The user can download the receipt as a picture and return to the form to generate more receipts.
 
+Idea brainstorm here: https://www.figma.com/file/yB9NcdNmEWpqW3gOI504f2/generate-receipt?node-id=0%3A1&t=2ZBGnk4KesdzdcDy-0
+
 ## Technologies Used
 
 This project was built with the following technologies:
@@ -33,4 +35,4 @@ To use this app, follow these steps:
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
