@@ -1,4 +1,4 @@
-import styled, {useTheme} from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 const Container = styled.div`
   display: flex;
@@ -10,14 +10,10 @@ const Container = styled.div`
 
 const Title = styled.h1`
   margin: 30px auto;
-`
+`;
 
 const Card = styled.form`
-  background-color: ${props => props.theme.primary};
-  box-shadow: 5px 9px 0px 3px rgba(0, 0, 0, 1);
-  -webkit-box-shadow: 5px 9px 0px 3px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 5px 9px 0px 3px rgba(0, 0, 0, 1);
-
+  background-color: ${(props) => props.theme.primary};
   transition: all 0.8s ease-in-out;
   border: 1px solid black;
   padding: 50px;
@@ -26,21 +22,17 @@ const Card = styled.form`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 5px 9px 0px 3px rgba(0, 0, 0, 1);
-    -webkit-box-shadow: 5px 9px 0px 3px rgba(0, 0, 0, 1);
-    -moz-box-shadow: 5px 9px 0px 3px rgba(0, 0, 0, 1);
   }
 `;
 
-const Input = styled.input<{ borderBottom: boolean }>`
-  padding: 20px;
+const Input = styled.input`
+  padding: 20px 0 20px 0px;
   width: 100%;
   background-color: transparent;
   font-size: 18px;
-  transition: border-bottom 0.8s ease-in-out;
   font-weight: bold;
-  border: 1px solid black;
-  border-bottom: ${(props) => (props.borderBottom ? "" : "none")};
+  border: none;
+  border-bottom: 1px solid black;
 
   ::placeholder {
     font-weight: normal;
@@ -49,6 +41,7 @@ const Input = styled.input<{ borderBottom: boolean }>`
 
   &:focus {
     outline: none;
+    transition: box-shadow 0.8s ease-in-out;
 
     ::placeholder {
       opacity: 0;
@@ -59,12 +52,11 @@ const Input = styled.input<{ borderBottom: boolean }>`
 const CheckboxWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, auto);
   grid-gap: 30px;
   width: 100%;
-  border: 1px solid black;
+  height: auto;
   border-bottom: none;
-  padding: 10px;
+  padding: 20px 0 20px 0px;
 `;
 
 const CheckboxContainer = styled.div`
@@ -90,17 +82,14 @@ const Checkmark = styled.span`
   border: 1px solid black;
 
   &::after {
-    content: "";
+    content: "x";
     position: absolute;
     display: none;
     left: 3px;
     top: 3px;
     width: 3px;
     height: 10px;
-    border: solid black;
-    border-width: 0 2px 2px 0;
     transform: rotate(-45deg);
-    background-color: #00ff00;
     z-index: 2;
   }
 
@@ -110,23 +99,17 @@ const Checkmark = styled.span`
 `;
 
 const FancyButton = styled.button`
-  background-color: ${props => props.theme.secondary};
-  color: white;
-  border: none;
+  background-color: ${(props) => props.theme.colors.secondary};
+  border: 1px solid black;
+
   padding: 10px 20px;
   font-size: 16px;
-  box-shadow: 2px 2px 0px 3px rgba(0, 0, 0, 1);
-  -webkit-box-shadow: 2px 2px 0px 3px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 2px 2px 0px 3px rgba(0, 0, 0, 1);
   transition: all 0.8s ease-in-out;
   cursor: pointer;
 
   &:hover {
     transform: translateY(-2px);
     font-size: 16px;
-    box-shadow: 2px 2px 0px 3px rgba(0, 0, 0, 1);
-    -webkit-box-shadow: 2px 2px 0px 3px rgba(0, 0, 0, 1);
-    -moz-box-shadow: 2px 2px 0px 3px rgba(0, 0, 0, 1);
   }
 
   &:active {
@@ -136,13 +119,20 @@ const FancyButton = styled.button`
 `;
 
 const ButtonWrapper = styled.div`
+  padding: 20px 0 20px 10px;
   text-align: center;
-  margin-top: 20px;
+`;
+
+const OptionWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-top: 10px;
+  gap: 40%;
 `;
 
 export default function Home() {
-
-  const theme = useTheme();
   const pempek = [
     "Adaan",
     "Lenjer",
@@ -158,25 +148,11 @@ export default function Home() {
     <Container>
       <Card>
         <Title> PO Pempek (Batch 1)</Title>
-        <Input type="text" placeholder="Name" borderBottom={false} />
-
-        <CheckboxWrapper>
-          <label htmlFor="30pcs">
-            <CheckboxContainer>
-              <InputCheckbox type="checkbox" id="30pcs" name="30pcs" />
-              <Checkmark />
-              <p style={{ marginLeft: "10px" }}>30pcs</p>
-            </CheckboxContainer>
-          </label>
-          <label htmlFor="20pcs">
-            <CheckboxContainer>
-              <InputCheckbox type="checkbox" id="20pcs" name="20pcs" />
-              <Checkmark />
-              <p style={{ marginLeft: "10px" }}>20pcs</p>
-            </CheckboxContainer>
-          </label>
-        </CheckboxWrapper>
-
+        <Input type="text" placeholder="Name" />
+        <OptionWrapper>
+          <p id="30pcs">30pcs</p>
+          <p id="20pcs">20pcs</p>
+        </OptionWrapper>
         <CheckboxWrapper>
           {pempek.map((item, index) => (
             <label key={index}>
@@ -186,7 +162,7 @@ export default function Home() {
                   id={`item${index + 1}`}
                   name={`item${index + 1}`}
                 />
-                <Checkmark />
+                <Checkmark style={{ marginLeft: "10px" }} />
                 <p style={{ marginLeft: "10px" }} key={index}>
                   {item}
                 </p>
@@ -195,19 +171,15 @@ export default function Home() {
           ))}
         </CheckboxWrapper>
 
-        <Input type="text" placeholder="Full Address" borderBottom={false} />
+        <Input type="text" placeholder="Full Address" />
 
-        <Input
-          type="tel"
-          placeholder="Contactable Phone Number"
-          borderBottom={true}
-        />
+        <Input type="tel" placeholder="Contactable Phone Number" />
         <label htmlFor="receipt">
           <CheckboxContainer>
             <InputCheckbox type="checkbox" id="receipt" name="receipt" />
-            <Checkmark />
+            <Checkmark style={{ marginLeft: "10px" }} />
             <p style={{ marginLeft: "10px" }}>
-              I agree to the terms and conditions
+              {"I've receive the payment receipt"}
             </p>
           </CheckboxContainer>
         </label>
